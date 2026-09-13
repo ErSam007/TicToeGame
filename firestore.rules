@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /rooms/{roomCode} {
+      // Allow read access to look up and join rooms
+      allow read: if true;
+
+      // Allow creating new room
+      allow create: if request.resource.data.roomCode == roomCode
+        && request.resource.data.board.size() == 9
+        && request.resource.data.currentTurn in ['X', 'O']
+        && request.resource.data.status in ['waiting', 'playing'];
+
+      // Allow updating room during gameplay (moves, heartbeats, rematches)
+      allow update: if request.resource.data.board.size() == 9
+        && request.resource.data.roomCode == roomCode;
+
+      // Allow host to delete room on leaving
+      allow delete: if true;
+    }
+  }
+}
