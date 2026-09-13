@@ -1,6 +1,7 @@
 # ⚡ GLOSSY TIC-TAC-TOE
 
 A production-ready, ultra-responsive, real-time playable web application built with a modern glossy glassmorphism aesthetic.
+![Uploading Screenshot 2026-09-13 182120.png…]()
 
 ---
 
